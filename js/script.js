@@ -1,7 +1,9 @@
 const contactForm = document.getElementById("contact-form");
 const loader = document.querySelector(".loader");
+const successMessage = document.querySelector(".success-message");
 
 loader.style.display = "none";
+successMessage.style.display = "none";
 
 contactForm.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -16,7 +18,12 @@ contactForm.addEventListener("submit", function (e) {
   })
     .then(() => {
       loader.style.display = "none";
-      window.location.href = "/thankyou.html";
+      successMessage.style.display = "block"; // Tampilkan pesan sukses
+      // Optional: Reset form fields
+      contactForm.reset();
     })
-    .catch((e) => alert("Error occured"));
+    .catch(() => {
+      loader.style.display = "none";
+      alert("Error occurred");
+    });
 });
